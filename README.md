@@ -2,8 +2,8 @@
 
 This repository contains a Docker image of JetBrains [YouTrack](http://www.jetbrains.com/youtrack).
 
-* The Docker image is available at [maartenba/youtrack](https://registry.hub.docker.com/u/maartenba/youtrack)
-* The GitHub repository is available at [maartenba/docker-youtrack](https://github.com/maartenba/docker-youtrack)
+* The origin Docker image is available at [maartenba/youtrack](https://registry.hub.docker.com/u/maartenba/youtrack)
+* The origin GitHub repository is available at [maartenba/docker-youtrack](https://github.com/maartenba/docker-youtrack)
 
 ## Usage
 
