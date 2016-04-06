@@ -1,4 +1,4 @@
-FROM dockerfile/java:oracle-java7
+FROM java:7
 MAINTAINER Alpha Hinex <AlphaHinex@gmail.com>
 
 RUN wget http://download-cf.jetbrains.com/charisma/youtrack-6.5.17057.jar -O youtrack.jar
