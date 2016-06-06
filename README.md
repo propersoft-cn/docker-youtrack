@@ -19,6 +19,12 @@ YouTrack starts and listens on port 80 in the container. To map it to the host's
 
 	docker run --name="youtrack" -p 9001:80 -d propersoft/docker-youtrack
 
+Append custom command to run YouTrack in different context:
+
+```
+docker run --name="youtrack-demo" -p 9988:80 -d propersoft/docker-youtrack java -Xmx1g -XX:MaxPermSize=250m -Djava.awt.headless=true -jar youtrack.jar 80/demo
+```
+
 ### Additional settings
 
 YouTrack stores its data and backups at ```/root/teamsysdata``` and ```/root/teamsysdata-backup```
