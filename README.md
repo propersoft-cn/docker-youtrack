@@ -31,4 +31,4 @@ YouTrack stores its data and backups at ```/root/teamsysdata``` and ```/root/tea
 and its logs at `/root/.youtrack/logs` in the container.
 If you wish to re-use data, it is a good idea to set up a volume mapping for these paths. For example:
 
-	docker run --name="youtrack" -v /root/docker-vols/youtrack/teamsysdata:/root/teamsysdata -v /root/docker-vols/youtrack/teamsysdata-backup:/root/teamsysdata-backup -v /root/docker-vols/youtrack/.youtrack/logs:/root/.youtrack/logs -p 9001:80 -d propersoft/docker-youtrack
+	docker run --name="youtrack" -v /home/ds/youtrack/teamsysdata:/root/teamsysdata -v /home/ds/youtrack/teamsysdata-backup:/root/teamsysdata-backup -v /home/ds/youtrack/.youtrack/logs:/root/.youtrack/logs -p 9001:80 -d propersoft/docker-youtrack:latest
