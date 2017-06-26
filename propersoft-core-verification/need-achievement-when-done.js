@@ -10,7 +10,7 @@ var entities = require('v1/entities');
 var workflow = require('v1/workflow');
 
 exports.rule = entities.Issue.stateMachine({
-  title: 'Need-achievement-when-done',
+  title: '置为 Done 状态时需附加成果物',
   fieldName: 'State',
   states: {
     'To-do': {

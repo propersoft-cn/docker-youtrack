@@ -10,14 +10,12 @@ var entities = require('v1/entities');
 var workflow = require('v1/workflow');
 
 exports.rule = entities.Issue.onChange({
-  title: '仅 Doing 状态可以填写 Time Tracking',
+  title: '单条 Time Tracking 时间上限为 10 小时',
   action: function(ctx) {
     var issue = ctx.issue;
-    if (issue.State.presentation !== 'Doing') {
-      issue.workItems.forEach(function(item) {
-        workflow.check(!item.isChanged('duration'), '仅 Doing 状态可以填写 Time Tracking！');
-      });
-    }
+    issue.workItems.forEach(function(item) {
+      workflow.check(item.duration <= 10*60, '单条 Time Tracking 时间上限为 10 小时！');
+    });
   },
   requirements: {
     // TODO: add requirements
