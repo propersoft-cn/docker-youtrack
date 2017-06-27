@@ -48,6 +48,13 @@ exports.rule = entities.Issue.stateMachine({
           targetState: 'Doing'
         }
       }
+    },
+    Verified: {
+      transitions: {
+        Doing: {
+          targetState: 'Doing'
+        }
+      }
     }
   },
   requirements: {
