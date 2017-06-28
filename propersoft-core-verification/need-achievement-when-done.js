@@ -10,7 +10,7 @@ var entities = require('v1/entities');
 var workflow = require('v1/workflow');
 
 exports.rule = entities.Issue.stateMachine({
-  title: '置为 Done 状态时需附加成果物',
+  title: '严格的任务状态调整约束',
   fieldName: 'State',
   states: {
     'To-do': {
@@ -52,7 +52,14 @@ exports.rule = entities.Issue.stateMachine({
     Verified: {
       transitions: {
         Doing: {
-          targetState: 'Doing'
+          targetState: 'Doing',
+          action: function(ctx) {
+            var issue = ctx.issue;
+            var project = issue.project;
+            var hasPermission = false;
+            hasPermission = issue.updatedBy.login === issue.reporter.login || issue.updatedBy.login === project.leader.login;
+            workflow.check(hasPermission, '仅项目负责人 ' + project.leader.fullName + ' 和任务创建人 ' + issue.reporter.fullName + ' 可调整任务验证状态!');
+          }
         }
       }
     }

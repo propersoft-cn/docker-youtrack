@@ -17,7 +17,7 @@ exports.rule = entities.Issue.onChange({
     if (issue.State.presentation === 'Verified') {
       var hasPermission = false;
       hasPermission = issue.updatedBy.login === issue.reporter.login || issue.updatedBy.login === project.leader.login;
-      workflow.check(!hasPermission, '仅项目负责人 ' + project.leader.fullName + ' 和任务创建人 ' + issue.reporter.fullName + ' 可验证任务!');
+      workflow.check(hasPermission, '仅项目负责人 ' + project.leader.fullName + ' 和任务创建人 ' + issue.reporter.fullName + ' 可验证任务!');
     }
   },
   requirements: {
