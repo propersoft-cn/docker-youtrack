@@ -57,7 +57,8 @@ exports.rule = entities.Issue.stateMachine({
             var issue = ctx.issue;
             var project = issue.project;
             var hasPermission = false;
-            hasPermission = issue.updatedBy.login === issue.reporter.login || issue.updatedBy.login === project.leader.login;
+            var currentUser = entities.User.current.login;
+            hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login;
             workflow.check(hasPermission, '仅项目负责人 ' + project.leader.fullName + ' 和任务创建人 ' + issue.reporter.fullName + ' 可调整任务验证状态!');
           }
         }
