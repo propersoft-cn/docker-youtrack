@@ -21,6 +21,15 @@ exports.rule = entities.Issue.stateMachine({
         },
         Backlog: {
           targetState: 'Backlog'
+        },
+        "Won't fix" : {
+          targetState: "Won't fix"
+        },
+        "Can't Reproduce": {
+          targetState: "Can't Reproduce"
+        },
+        Duplicate: {
+          targetState: 'Duplicate'
         }
       }
     },
@@ -36,6 +45,15 @@ exports.rule = entities.Issue.stateMachine({
             });
             workflow.check(hasAchivment, '需在任务评论栏中填写包含“成果物”字样的评论方可将任务状态设置为 Done ！');
           }
+        },
+        "Won't fix" : {
+          targetState: "Won't fix"
+        },
+        "Can't Reproduce": {
+          targetState: "Can't Reproduce"
+        },
+        Duplicate: {
+          targetState: 'Duplicate'
         }
       }
     },
