@@ -13,6 +13,13 @@ exports.rule = entities.Issue.stateMachine({
   title: '严格的任务状态调整约束',
   fieldName: 'State',
   states: {
+    Backlog: {
+      transitions: {
+        'To-do': {
+          targetState: 'To-do'
+        }
+      }
+    },
     'To-do': {
       initial: true,
       transitions: {
