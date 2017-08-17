@@ -97,6 +97,13 @@ exports.rule = entities.Issue.stateMachine({
           }
         }
       }
+    },
+    "Won't fix": {
+      transitions: {
+        'To-do': {
+          targetState: 'To-do'
+        }
+      }
     }
   },
   requirements: {
