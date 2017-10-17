@@ -14,10 +14,12 @@ exports.rule = entities.Issue.onChange({
   action: function(ctx) {
     var issue = ctx.issue;
     var project = issue.project;
-    if (issue.isChanged('Delays') || issue.isChanged('Rejects')) {
+    if (issue.isChanged('Delays') || issue.isChanged('Rejects') || issue.isChanged('Type') || issue.isChanged('Priority')) {
       var hasPermission = false;
+      var onlyPriorityChangedWhenAssign = issue.isChanged('Priority') && issue.isChanged('Assignee') && !issue.isChanged("Delays") && !issue.isChanged('Rejects') && !issue.isChanged('Type');
       var currentUser = entities.User.current.login;
-      hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login || currentUser.indexOf('workflow') > -1;
+      var changedByWorkflow = currentUser.indexOf('workflow') > -1;
+      hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login || onlyPriorityChangedWhenAssign || changedByWorkflow;
       workflow.check(hasPermission, '绩效因子仅项目负责人 ' + project.leader.fullName + ' 和任务创建人 ' + issue.reporter.fullName + ' 可调整!');
     }
   },
