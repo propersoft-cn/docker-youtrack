@@ -14,7 +14,7 @@ exports.rule = entities.Issue.onChange({
   action: function(ctx) {
     var issue = ctx.issue;
     var project = issue.project;
-    if (issue.State.presentation === 'Verified') {
+    if (issue.isChanged('State') && issue.State.presentation === 'Verified') {
       var hasPermission = false;
       var currentUser = entities.User.current.login;
       hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login;
