@@ -15,7 +15,7 @@ exports.rule = entities.Issue.onChange({
     var issue = ctx.issue;
     issue.workItems.forEach(function(item) {
       var notInFuture = item.created >= item.date;
-      workflow.check(notInFuture, 'Time tracking 不能填写未来的时间！');
+      workflow.check(notInFuture, 'Time tracking 不能填写未来的时间！内容为“' + item.description + '”的记录不符合要求，请联系填写人(' + item.creator.fullName + ')重新填写！');
     });
   },
   requirements: {
