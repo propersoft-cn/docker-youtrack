@@ -14,7 +14,7 @@ exports.rule = entities.Issue.onChange({
   action: function(ctx) {
     var issue = ctx.issue;
     var project = issue.project;
-    if (issue.isChanged('Assignee')) {
+    if (issue.isChanged('Assignee') && issue.becomes('Assignee', null)) {
       var hasPermission = false;
       var currentUser = entities.User.current.login;
       hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login;
