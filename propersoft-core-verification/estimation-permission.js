@@ -17,7 +17,7 @@ exports.rule = entities.Issue.onChange({
     if (issue.isChanged('Estimation')) {
       var hasPermission = false;
       var currentUser = entities.User.current.login;
-      hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login;
+      hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login || (issue.links["parent for"].size > 0 && issue.links["subtask of"].size === 0);
       workflow.check(hasPermission, '评估工时仅项目负责人 ' + project.leader.fullName + ' 和任务创建人 ' + issue.reporter.fullName + ' 可调整!');
     }
   },
