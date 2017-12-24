@@ -18,7 +18,7 @@ exports.rule = entities.Issue.onChange({
     if (assigning || verifing) {
       var isBug = issue.Type.name.toLowerCase().indexOf('bug') > -1;
       var period = issue.fields.Estimation;
-      var minutes = !period ? 0 : (period.getMinutes() + 60 * (period.getHours() + 8 * period.getDays()));
+      var minutes = !period ? 0 : (period.getMinutes() + 60 * (period.getHours() + 8 * (period.getDays() + 5 * period.getWeeks())));
       var hasEstimation = minutes > 0;
       var requireEstimation = !isBug && !hasEstimation;
       workflow.check(!requireEstimation, '非 bug 类型任务，指派或验证时必须填写评估工时！');
