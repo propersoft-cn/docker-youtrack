@@ -15,7 +15,10 @@ exports.rule = entities.Issue.onChange({
     var issue = ctx.issue;
     var period = issue.fields.Estimation;
     var minutes = !period ? 0 : (period.getMinutes() + 60 * (period.getHours() + 8 * (period.getDays() + 5 * period.getWeeks())));
-    workflow.check(minutes <= 3*8*60, '任务粒度不能超过 3 天评估工时！');
+    var isOvertime = minutes > 3*8*60;
+    var isParent = issue.links["parent for"].size > 0 && issue.links["subtask of"].size === 0;
+    var isRestricted = isOvertime && !isParent;
+    workflow.check(!isRestricted, '任务([' + issue.id + '])粒度不能超过 3 天评估工时！');
   },
   requirements: {
     // TODO: add requirements
