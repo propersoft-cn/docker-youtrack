@@ -16,7 +16,10 @@ exports.rule = entities.Issue.onChange({
     var project = issue.project;
     if (issue.isChanged('Delays') || issue.isChanged('Rejects') || issue.isChanged('Type') || issue.isChanged('Priority')) {
       var hasPermission = false;
-      var onlyPriorityChangedWhenAssign = issue.isChanged('Priority') && issue.isChanged('Assignee') && !issue.isChanged("Delays") && !issue.isChanged('Rejects') && !issue.isChanged('Type');
+      var isDelaysChanged = issue.hasOwnProperty('Delays') && issue.isChanged('Delays');
+      var isRejectsChanged = issue.hasOwnProperty('Rejects') && issue.isChanged('Rejects');
+      var isDifficultyChanged = issue.hasOwnProperty('Difficulty') && issue.isChanged('Difficulty');
+      var onlyPriorityChangedWhenAssign = issue.isChanged('Priority') && issue.isChanged('Assignee') && !isDelaysChanged && !isRejectsChanged && !issue.isChanged('Type') && !isDifficultyChanged;
       var currentUser = entities.User.current.login;
       var changedByWorkflow = currentUser.indexOf('workflow') > -1;
       hasPermission = currentUser === issue.reporter.login || currentUser === project.leader.login || onlyPriorityChangedWhenAssign || changedByWorkflow;

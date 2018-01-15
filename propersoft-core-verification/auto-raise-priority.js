@@ -10,7 +10,7 @@ var entities = require('v1/entities');
 
 exports.rule = entities.Issue.onSchedule({
   title: '优先级自动升级',
-  search: '#Unresolved #Major #Critical #Show-stopper',
+  search: '#Unresolved #Major #Critical #Show-stopper -Unassigned',
   // From Tuesday to Saturday
   // http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html
   cron: '0 0 2 ? * TUE-SAT',
