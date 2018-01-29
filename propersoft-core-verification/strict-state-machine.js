@@ -70,7 +70,12 @@ exports.rule = entities.Issue.stateMachine({
           targetState: 'Verified'
         },
         Doing: {
-          targetState: 'Doing'
+          targetState: 'Doing',
+          action: function(ctx) {
+            var issue = ctx.issue;
+            var rr = issue.Rejects || 0;
+            issue.Rejects = rr + 1;
+          }
         },
         "Won't fix" : {
           targetState: "Won't fix"
