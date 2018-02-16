@@ -109,6 +109,13 @@ exports.rule = entities.Issue.stateMachine({
           targetState: 'To-do'
         }
       }
+    },
+    "Duplicate": {
+      transitions: {
+        'To-do': {
+          targetState: 'To-do'
+        }
+      }
     }
   },
   requirements: {
