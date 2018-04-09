@@ -14,10 +14,16 @@ exports.rule = entities.Issue.onSchedule({
   // From Tuesday to Saturday
   // http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html
   cron: '0 0 2 ? * TUE-SAT',
+//   cron: '0/5 * * * * ?',
   action: function(ctx) {
     var issue = ctx.issue;
+    
+    if (issue.State.name === 'Done' || issue.State.name === "Verified") {
+      console.log('Due to bug of state field, ignore ' + issue.id + ' which has "Done" or "Verified" state.');
+      return;
+    }
+    
     console.log('Start to raise priority of ' + issue.id);
-    var major = issue.project.findFieldByName('Priority').findValueByName('Major');
     var critical = issue.project.findFieldByName('Priority').findValueByName('Critical');
     var ss = issue.project.findFieldByName('Priority').findValueByName('Show-stopper');
     

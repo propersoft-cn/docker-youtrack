@@ -1,1 +1,12 @@
-{"name":"propersoft-core-verification","title":null,"description":null}
+{
+  "name" : "propersoft-core-verification",
+  "title" : null,
+  "description" : null,
+  "dependencies" : {
+    "@jetbrains/youtrack-scripting-api" : "^2018.1.39916"
+  },
+  "youtrack" : {
+    "autoAttached" : false,
+    "readOnly" : false
+  }
+}
